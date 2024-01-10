@@ -1,8 +1,10 @@
 import { Link, NavLink } from 'react-router-dom';
-
+import { useSelector} from 'react-redux';
 
 
 const Navbar = () => {
+
+	const { isAuthenticated } = useSelector(state => state.user);
 
 	const authLinks = (
 		<>
@@ -58,9 +60,8 @@ const Navbar = () => {
 								Home
 							</NavLink>
 						</li>
-            {authLinks}
-            {guestLinks}
-						{/* {isAuthenticated ? authLinks : guestLinks} */}
+
+						{isAuthenticated ? authLinks : guestLinks}
 					</ul>
 				</div>
 			</div>
