@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetRegistered, login } from '../features/user';
 import Layout from '../components/Layout';
+import { Navigate } from 'react-router-dom';
 
 const LoginPage = () => {
   
   const dispatch = useDispatch();
 
-  const { loading} = useSelector(state => state.user);
+  const { loading, isAuthenticated, registered} = useSelector(state => state.user);
 
   
   const [formData, setFormData] = useState({
@@ -16,8 +17,9 @@ const LoginPage = () => {
   });
 
   useEffect(() => {
-    dispatch(resetRegistered());
-  },[]);
+    if (registered) 
+      dispatch(resetRegistered());
+  },[registered]);
 
 
   const { email, password } = formData;
@@ -33,6 +35,8 @@ const LoginPage = () => {
     dispatch(login({email, password}))
     
   }
+
+  if (isAuthenticated ) return <Navigate to='/dashboard' />;
 
   return (
     <Layout title='Auth Site | Login' content='Login page'>

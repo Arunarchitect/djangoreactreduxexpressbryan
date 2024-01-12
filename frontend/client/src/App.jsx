@@ -4,24 +4,28 @@ import HomePage from './containers/HomePage';
 import DashboardPage from './containers/DashboardPage';
 import LoginPage from './containers/LoginPage';
 import RegisterPage from './containers/RegisterPage';
-import {Provider} from 'react-redux'
-import { store} from './store';
 import Test from './containers/Test';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import {checkAuth} from './features/user'
 
 const App = () => {
-  return (
-    <Provider store={store}>
-      <Router>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/dashboard' element={<DashboardPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/test' element={<Test />} />
-        </Routes>
-      </Router>
-    </Provider>
-  );
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(checkAuth());
+	}, []);
+
+	return (
+		<Router>
+			<Routes>
+				<Route path='/' element={<HomePage />} />
+				<Route path='/dashboard' element={<DashboardPage />} />
+				<Route path='/login' element={<LoginPage />} />
+				<Route path='/register' element={<RegisterPage />} />
+			</Routes>
+		</Router>
+	);
 };
 
 export default App;
