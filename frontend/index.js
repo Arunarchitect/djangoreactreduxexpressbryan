@@ -13,12 +13,21 @@ const registerRoute = require('./routes/auth/register');
 const loginRoute = require('./routes/auth/login');
 const meRoute = require('./routes/auth/me');
 
+
+
+
 const app = express();
 
 app.use(express.json())
 
 app.use(cors());
 app.use(cookieParser());
+
+// Use the route handlers for specific endpoints
+app.use(loginRoute);
+
+app.use(meRoute);
+app.use(registerRoute);
 
 app.use(express.static('client/dist'));
 app.get('*', (req, res) => {

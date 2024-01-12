@@ -21,7 +21,7 @@ export const register = createAsyncThunk(
       })
       const data = await res.json()
       
-      if (res.status === 200) {
+      if (res.status === 201) {
         const {dispatch} = thunkAPI
         return  data;
       } else {

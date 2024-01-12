@@ -6,6 +6,7 @@ const router = express.Router();
 router.post('/api/users/register', async  (req, res)=> {
     const {first_name ,last_name,email , password}= req.body;
 
+
     const body = JSON.stringify({
         first_name,
         last_name,
@@ -14,7 +15,7 @@ router.post('/api/users/register', async  (req, res)=> {
     });
 
     try {
-        const apiRes = await fetch(`${process.env.API_URL}/api/users/register`, {
+        const apiRes = await fetch('http://127.0.0.1:8000/api/users/register', {
             method: 'POST',
             headers: {
                 Accept : 'application/json',

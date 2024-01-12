@@ -6,6 +6,7 @@ import LoginPage from './containers/LoginPage';
 import RegisterPage from './containers/RegisterPage';
 import {Provider} from 'react-redux'
 import { store} from './store';
+import Test from './containers/Test';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path='/dashboard' element={<DashboardPage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
+          <Route path='/test' element={<Test />} />
         </Routes>
       </Router>
     </Provider>
