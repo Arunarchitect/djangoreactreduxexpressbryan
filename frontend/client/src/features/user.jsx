@@ -31,6 +31,7 @@ export const register = createAsyncThunk(
       return thunkAPI.rejectWithValue(err.response.data);
     }
 })
+
  const getUser = createAsyncThunk('users/me',  async(_, thunkAPI) => {
   try{
     const res = await fetch('api/users/me', {
@@ -208,3 +209,54 @@ const userSlice = createSlice({
 
 export const { resetRegistered } = userSlice.actions
 export default userSlice.reducer
+
+
+
+
+// code to display register error as an alert
+// export const register = createAsyncThunk(
+//   'users/register', 
+//   async ({ first_name, last_name, email, password }, thunkAPI) => {
+//     const body = JSON.stringify({
+//       first_name,
+//       last_name,
+//       email,
+//       password
+//     });
+
+//     try {
+//       const res = await fetch('/api/users/register', {
+//         method: 'POST',
+//         headers: {
+//           Accept: 'application/json',
+//           'Content-Type': 'application/json',
+//         },
+//         body
+//       });
+
+//       const data = await res.json();
+//       console.log(data);
+
+//       if (res.status === 201) {
+//         const { dispatch } = thunkAPI;
+//         return data;
+//       } else {
+//         // Iterate over properties and show each error message in an alert
+//         Object.keys(data).forEach(key => {
+//           if (Array.isArray(data[key]) && data[key].length > 0) {
+//             const errorMessage = data[key][0];
+//             alert(errorMessage);
+//           }
+//         });
+
+//         return thunkAPI.rejectWithValue(data);
+//       }
+//     } catch (err) {
+//       // Log the entire error object for better understanding
+//       console.error('Error:', err);
+
+//       // If there's no response property, reject with the entire error object
+//       return thunkAPI.rejectWithValue(err.response ? err.response.data : err);
+//     }
+//   }
+// );
